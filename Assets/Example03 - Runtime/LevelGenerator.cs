@@ -15,7 +15,6 @@ public class LevelGenerator : MonoBehaviour {
 
 	void Start () {
 		GenerateLevel();
-
         surface.BuildNavMesh();
 	}
 	
@@ -34,6 +33,8 @@ public class LevelGenerator : MonoBehaviour {
                     wall.transform.localScale = new Vector3(2, Random.Range(1, 3), 2);
 					Vector3 pos = new Vector3(x - width / 2f, 1f, y - height / 2f);
 					Instantiate(wall, pos, Quaternion.identity, transform);
+                    wall.tag = "Muro";
+
 				} else if (!playerSpawned) // Should we spawn a player?
 				{
 					// Spawn the player

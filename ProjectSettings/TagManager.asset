@@ -11,6 +11,9 @@ TagManager:
   - Cuerpo
   - Enemy
   - Objeto
+  - Canvas
+  - Muro
+  - Nada
   layers:
   - Default
   - TransparentFX

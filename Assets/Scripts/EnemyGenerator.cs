@@ -26,7 +26,7 @@ public class EnemyGenerator : MonoBehaviour
 
     }
 
-    private void Update()
+    public void Update()
     {
         tiempo += Time.fixedDeltaTime;
 
@@ -35,10 +35,9 @@ public class EnemyGenerator : MonoBehaviour
             Generar();
             tiempo = 0;
         }
-        
     }
 
-    void Generar()
+    public void Generar()
     {
         for (int i = 0; i <= Random.Range(10, 20); i++)
         {

@@ -18,6 +18,7 @@ public class ControllerEnemy : MonoBehaviour
 
     void Start()
     {
+        this.gameObject.tag = "Enemy";
         this.gameObject.AddComponent<NavMeshAgent>();
         character = this.gameObject.GetComponent<ThirdPersonCharacter>();
         agent = this.gameObject.GetComponent<NavMeshAgent>();
@@ -25,6 +26,7 @@ public class ControllerEnemy : MonoBehaviour
         colliderEnemy.isTrigger = true;
         agent.updateRotation = false;
         agent.speed = Random.Range(0.7f, 1);
+        //agent.speed = 0.1f;
         agent.stoppingDistance = 0.01f;
     }
 

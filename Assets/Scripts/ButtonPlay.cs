@@ -7,7 +7,9 @@ using TMPro;
 
 public class ButtonPlay : MonoBehaviour
 {
-    public TextMeshProUGUI textoInstrucciones;
+    public TextMeshProUGUI textoInstrucciones1;
+    public TextMeshProUGUI textoInstrucciones2;
+    public TextMeshProUGUI textoInstrucciones3;
     public GameObject A_instrucciones;
     public GameObject C_instrucciones;
 
@@ -21,7 +23,9 @@ public class ButtonPlay : MonoBehaviour
     {
         if (aInstrucciones)
         {
-            textoInstrucciones.text = "Tapea en el mapa para moverte para moverte" + " Boton B Para atacar " + " No te dejes atrapar";
+            textoInstrucciones1.text = "Tapea en el mapa para moverte";
+            textoInstrucciones2.text = " Boton B Para atacar al enemigo mas cercano";
+            textoInstrucciones3.text = " No te dejes atrapar";
             A_instrucciones.SetActive(false);
             C_instrucciones.SetActive(true);
         }
@@ -31,7 +35,9 @@ public class ButtonPlay : MonoBehaviour
     {
         if (cInstrucciones)
         {
-            textoInstrucciones.text = "";
+            textoInstrucciones1.text = "";
+            textoInstrucciones2.text = "";
+            textoInstrucciones3.text = "";
             C_instrucciones.SetActive(false);
             A_instrucciones.SetActive(true);
         }
