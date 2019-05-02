@@ -14,20 +14,32 @@ public class BotonAtaque : MonoBehaviour
     {
         if (disparar)
         {
-            player = GameObject.FindGameObjectWithTag("Player");
-            player.transform.LookAt(target.target.transform);
-
-            disparo = true;
-            if (disparo)
+            if (target.municion != 0)
             {
-                bala = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                bala.GetComponent<Collider>().isTrigger = true;
-                bala.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-                bala.transform.position = new Vector3(player.transform.position.x, 1, player.transform.position.z);
-                bala.AddComponent<Bala>();
-                disparar = false;
+                player = GameObject.FindGameObjectWithTag("Player");
+                player.transform.LookAt(target.target.transform);
+
+                disparo = true;
+                if (disparo)
+                {
+                    bala = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    bala.GetComponent<Collider>().isTrigger = true;
+                    bala.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                    bala.transform.position = new Vector3(player.transform.position.x, 1, player.transform.position.z);
+                    bala.AddComponent<Bala>();
+                    target.municion -= 1;
+                    disparar = false;
+                }
+            }
+            else if (target.municion == 0)
+            {
+                target.sinMunicion = "No tienes mas balas";
+            }
+            else
+            {
+                target.sinMunicion = " ";
+
             }
         }
-
     }
 }

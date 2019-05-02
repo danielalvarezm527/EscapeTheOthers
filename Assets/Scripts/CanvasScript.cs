@@ -9,6 +9,8 @@ public class CanvasScript : MonoBehaviour
     public TextMeshProUGUI Ttiempo;
     public TextMeshProUGUI TNumEnemigos;
     public TextMeshProUGUI TPuntaje;
+    public TextMeshProUGUI TMunicion;
+    public TextMeshProUGUI TSinMunicion;
 
     public GameObject[] enemigos;
     public GameObject target;
@@ -16,6 +18,7 @@ public class CanvasScript : MonoBehaviour
     public GameObject nada;
     public GameObject elItem;
 
+    public int municion = 10;
     public int tiempoInicial;
     public float escalaDeTiempo = 1;
     public float tiempoFrameTimeScale = 0f;
@@ -25,6 +28,8 @@ public class CanvasScript : MonoBehaviour
     public static float tiempoMostrarSegundos = 0f;
     public static int puntaje = 0;
     public static string tiempoFinal;
+    public string sinMunicion;
+
 
     public EnemyGenerator generarMas;
     public ControllerEnemy controladorEnemigo;
@@ -34,6 +39,7 @@ public class CanvasScript : MonoBehaviour
         escalaDelTiempoInicial = escalaDeTiempo;
         tiempoMostrarSegundos = tiempoInicial;
         ActualizarReloj(tiempoInicial);
+        target = GameObject.FindGameObjectWithTag("Nada");
         StartCoroutine(buscaEnemigos());
 
     }
@@ -69,6 +75,9 @@ public class CanvasScript : MonoBehaviour
 
     void Update()
     {
+        TSinMunicion.text = sinMunicion;
+        TMunicion.text = municion.ToString() + " Balas";
+
         enemigos = GameObject.FindGameObjectsWithTag("Enemy");
 
         TNumEnemigos.text = enemigos.Length.ToString() + " Enemigos";
@@ -83,7 +92,16 @@ public class CanvasScript : MonoBehaviour
 
         if (enemigos.Length == 0)
         {
+            if (generarMas.numVecesGenerar > 2)
+            {
+                generarMas.minimo += 3;
+                generarMas.maximo += 3;
+                generarMas.numVecesGenerar = 0;
+                Debug.Log("Se generaron mas");
+            }
+
             generarMas.Generar();
+
         }
     }
 

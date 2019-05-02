@@ -14,6 +14,7 @@ TagManager:
   - Canvas
   - Muro
   - Nada
+  - Caja
   layers:
   - Default
   - TransparentFX

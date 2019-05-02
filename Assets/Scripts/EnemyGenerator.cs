@@ -14,6 +14,9 @@ public class EnemyGenerator : MonoBehaviour
     public float tiempo;
 
     int numSpawn = 0;
+    public int minimo = 10;
+    public int maximo = 20;
+    public int numVecesGenerar = 0;
 
     void Start()
     {
@@ -39,7 +42,8 @@ public class EnemyGenerator : MonoBehaviour
 
     public void Generar()
     {
-        for (int i = 0; i <= Random.Range(10, 20); i++)
+        numVecesGenerar += 1;
+        for (int i = 0; i <= Random.Range(minimo, maximo); i++)
         {
             enemy = GameObject.FindGameObjectWithTag("Cuerpo");
 

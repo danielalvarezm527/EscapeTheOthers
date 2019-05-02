@@ -55,5 +55,6 @@ public class Bala : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
     }
 }
