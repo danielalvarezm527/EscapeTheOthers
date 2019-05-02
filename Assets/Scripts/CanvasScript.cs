@@ -24,6 +24,7 @@ public class CanvasScript : MonoBehaviour
     public float tiempoFrameTimeScale = 0f;
     public float escalaDelTiempoInicial;
     public float distancia;
+    public float tiempo;
 
     public static float tiempoMostrarSegundos = 0f;
     public static int puntaje = 0;
@@ -41,7 +42,7 @@ public class CanvasScript : MonoBehaviour
         ActualizarReloj(tiempoInicial);
         target = GameObject.FindGameObjectWithTag("Nada");
         StartCoroutine(buscaEnemigos());
-
+        puntaje = 0;
     }
 
     IEnumerator buscaEnemigos()
@@ -75,6 +76,21 @@ public class CanvasScript : MonoBehaviour
 
     void Update()
     {
+        tiempo += Time.deltaTime;
+
+        if(municion != 0)
+            sinMunicion = " ";
+
+        if (tiempo > 1.5f)
+        {
+            TSinMunicion.color = Color.red;
+            if (tiempo > 3)
+            {
+                TSinMunicion.color = Color.white;
+                tiempo = 0;
+            }
+        }
+
         TSinMunicion.text = sinMunicion;
         TMunicion.text = municion.ToString() + " Balas";
 
@@ -94,8 +110,8 @@ public class CanvasScript : MonoBehaviour
         {
             if (generarMas.numVecesGenerar > 2)
             {
-                generarMas.minimo += 3;
-                generarMas.maximo += 3;
+                generarMas.minimo += 5;
+                generarMas.maximo += 5;
                 generarMas.numVecesGenerar = 0;
                 Debug.Log("Se generaron mas");
             }

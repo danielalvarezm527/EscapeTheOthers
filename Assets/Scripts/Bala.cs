@@ -16,6 +16,8 @@ public class Bala : MonoBehaviour
 
     public float distancia;
 
+    public Renderer colorBala;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +26,8 @@ public class Bala : MonoBehaviour
 
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         targetEnemy = canvas.GetComponent<CanvasScript>();
-
+        colorBala = gameObject.GetComponent<Renderer>();
+        colorBala.material.color = Color.magenta;
     }
 
     
@@ -39,7 +42,7 @@ public class Bala : MonoBehaviour
             miro = true;
         }
 
-        esferaRB.AddForce(transform.forward * 5);
+        esferaRB.AddForce(transform.forward * 50);
 
     }
 

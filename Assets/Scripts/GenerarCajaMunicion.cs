@@ -5,19 +5,23 @@ using UnityEngine;
 public class GenerarCajaMunicion : MonoBehaviour
 {
     public float tiempo;
-    public int width = 40;
-    public int height = 40;
+    public int cajaWidth = 40;
+    public int cajaHeight = 40;
     public int numCajas = 40;
 
     public GameObject caja;
     public GameObject[] cajas;
 
+    public Light cajaLight;
+
     public CanvasScript cantidadMuni;
 
     private void Start()
     {
+        cajaLight = caja.GetComponent<Light>();
+        cajaLight.intensity = 200;
+        caja.name = "Enegia";
         CrearCaja();
-
     }
 
     void Update()

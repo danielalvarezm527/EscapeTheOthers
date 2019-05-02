@@ -25,7 +25,7 @@ public class ButtonPlay : MonoBehaviour
         {
             textoInstrucciones1.text = "Tapea en el mapa para moverte";
             textoInstrucciones2.text = "Boton rojo Para atacar al enemigo mas cercano";
-            textoInstrucciones3.text = "No te dejes atrapar";
+            textoInstrucciones3.text = "Recoge energia para poder disparar Y No te dejes atrapar";
             A_instrucciones.SetActive(false);
             C_instrucciones.SetActive(true);
         }

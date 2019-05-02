@@ -38,7 +38,7 @@ public class LevelGenerator : MonoBehaviour {
 				} else if (!playerSpawned) // Should we spawn a player?
 				{
 					// Spawn the player
-					Vector3 pos = new Vector3(x - width / 2f, 1.25f, y - height / 2f);
+					Vector3 pos = new Vector3(-10, 1.25f, -34);
                     player.name = "Jugador";
 					Instantiate(player, pos, Quaternion.identity);
 					playerSpawned = true;
