@@ -26,6 +26,7 @@ public class ControllerEnemy : MonoBehaviour
         colliderEnemy.isTrigger = true;
         agent.updateRotation = false;
         agent.speed = Random.Range(0.7f, 1);
+        //agent.speed = 0.1f;
         agent.stoppingDistance = 0.01f;
     }
 

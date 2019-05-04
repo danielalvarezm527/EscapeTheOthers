@@ -19,12 +19,18 @@ public class ButtonPlay : MonoBehaviour
             SceneManager.LoadScene(1);
     }
 
+    public void CerrarJuego(bool cerrar)
+    {
+        if (cerrar)
+            Application.Quit();
+    }
+
     public void AbrirInstrucciones(bool aInstrucciones)
     {
         if (aInstrucciones)
         {
             textoInstrucciones1.text = "Tapea en el mapa para moverte";
-            textoInstrucciones2.text = "Boton rojo Para atacar al enemigo mas cercano";
+            textoInstrucciones2.text = "Boton rojo Para atacar al enemigo mas cercano, Boton azul para cambiar la camara";
             textoInstrucciones3.text = "Recoge energia para poder disparar Y No te dejes atrapar";
             A_instrucciones.SetActive(false);
             C_instrucciones.SetActive(true);

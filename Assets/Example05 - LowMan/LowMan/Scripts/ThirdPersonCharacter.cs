@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -46,38 +49,42 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		public void Move(Vector3 move, bool crouch, bool jump)
 		{
 
-			// convert the world relative moveInput vector into a local-relative
-			// turn amount and forward amount required to head in the desired
-			// direction.
-			if (move.magnitude > 1f) move.Normalize();
-			move = transform.InverseTransformDirection(move);
-			CheckGroundStatus();
-			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2(move.x, move.z);
-			m_ForwardAmount = move.z;
+            // convert the world relative moveInput vector into a local-relative
+            // turn amount and forward amount required to head in the desired
+            // direction.
 
-			ApplyExtraTurnRotation();
+                if (move.magnitude > 1f)
+                    move.Normalize();
+                move = transform.InverseTransformDirection(move);
+                CheckGroundStatus();
+                move = Vector3.ProjectOnPlane(move, m_GroundNormal);
+                m_TurnAmount = Mathf.Atan2(move.x, move.z);
+                m_ForwardAmount = move.z;
 
-			// control and velocity handling is different when grounded and airborne:
-			if (m_IsGrounded)
-			{
-				HandleGroundedMovement(crouch, jump);
-			}
-			else
-			{
-				HandleAirborneMovement();
-			}
+                ApplyExtraTurnRotation();
 
-			ScaleCapsuleForCrouching(crouch);
-			PreventStandingInLowHeadroom();
+                // control and velocity handling is different when grounded and airborne:
+                if (m_IsGrounded)
+                {
+                    HandleGroundedMovement(crouch, jump);
+                }
+                else
+                {
+                    HandleAirborneMovement();
+                }
 
-			// send input and other state parameters to the animator
-			UpdateAnimator(move);
+                ScaleCapsuleForCrouching(crouch);
+                PreventStandingInLowHeadroom();
+
+                // send input and other state parameters to the animator
+                UpdateAnimator(move);
+            
 		}
 
 
 		void ScaleCapsuleForCrouching(bool crouch)
 		{
+
 			if (m_IsGrounded && crouch)
 			{
 				if (m_Crouching) return;
@@ -102,6 +109,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void PreventStandingInLowHeadroom()
 		{
+
 			// prevent standing up in crouch-only zones
 			if (!m_Crouching)
 			{
@@ -130,9 +138,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// calculate which leg is behind, so as to leave that leg trailing in the jump animation
 			// (This code is reliant on the specific run cycle offset in our animations,
 			// and assumes one leg passes the other at the normalized clip times of 0.0 and 0.5)
-			float runCycle =
-				Mathf.Repeat(
-					m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + m_RunCycleLegOffset, 1);
+			float runCycle =Mathf.Repeat(m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + m_RunCycleLegOffset, 1);
 			float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
 			if (m_IsGrounded)
 			{
@@ -214,8 +220,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				m_IsGrounded = true;
 				m_Animator.applyRootMotion = true;
 			}
-			else
-			{
+			else 
+            {
 				m_IsGrounded = false;
 				m_GroundNormal = Vector3.up;
 				m_Animator.applyRootMotion = false;
