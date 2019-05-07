@@ -16,6 +16,7 @@ TagManager:
   - Nada
   - Caja
   - var
+  - joys
   layers:
   - Default
   - TransparentFX

@@ -92,7 +92,7 @@ public class CanvasScript : MonoBehaviour
         }
 
         TSinMunicion.text = sinMunicion;
-        TMunicion.text = municion.ToString() + " Balas";
+        TMunicion.text = municion.ToString() + " Energias";
 
         enemigos = GameObject.FindGameObjectsWithTag("Enemy");
 
