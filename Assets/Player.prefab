@@ -74,7 +74,9 @@ MonoBehaviour:
   camara: {fileID: 0}
   agent: {fileID: 1129035744013632095}
   character: {fileID: 1129035744013632094}
+  vec: {x: 0, y: 0, z: 0}
   canvas: {fileID: 0}
+  contadorTouch: 0
 --- !u!114 &1129035744013632094
 MonoBehaviour:
   m_ObjectHideFlags: 0
