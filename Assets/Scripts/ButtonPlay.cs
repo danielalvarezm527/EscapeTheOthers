@@ -16,7 +16,9 @@ public class ButtonPlay : MonoBehaviour
     public void CambiarScena(bool cambiar)
     {
         if (cambiar)
+        {
             SceneManager.LoadScene(1);
+        }       
     }
 
     public void CerrarJuego(bool cerrar)

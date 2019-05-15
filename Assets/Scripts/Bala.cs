@@ -10,10 +10,6 @@ public class Bala : MonoBehaviour
     public GameObject enemigo;
     public GameObject target;
 
-    public ParticleSystem particulaMuerte;
-
-    public AudioSource sonidoParticula;
-
     public Rigidbody esferaRB;
 
     public bool miro = false;
@@ -22,11 +18,8 @@ public class Bala : MonoBehaviour
 
     public Renderer colorBala;
 
-    // Start is called before the first frame update
     void Start()
     {
-        sonidoParticula = FindObjectOfType<AudioSource>();
-        particulaMuerte = FindObjectOfType<ParticleSystem>();
         esferaRB = this.gameObject.AddComponent<Rigidbody>();
         esferaRB.useGravity = false;
         canvas = GameObject.FindGameObjectWithTag("Canvas");
@@ -35,9 +28,6 @@ public class Bala : MonoBehaviour
         colorBala.material.color = Color.magenta;
     }
 
-    
-
-    // Update is called once per frame
     void Update()
     {
 
@@ -55,12 +45,9 @@ public class Bala : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            particulaMuerte.transform.position = new Vector3(other.transform.position.x, other.transform.position.y + 4, other.transform.position.z);
-            sonidoParticula.Play();
-            particulaMuerte.Play();
             CanvasScript.puntaje += 10;
-            this.gameObject.SetActive(false);
-            other.gameObject.SetActive(false);
+            Destroy( this.gameObject);
+            Destroy(other.gameObject);
         }
         if (other.gameObject.tag == "Muro")
         {

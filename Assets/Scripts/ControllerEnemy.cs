@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
@@ -28,14 +27,16 @@ public class ControllerEnemy : MonoBehaviour
         agent.speed = Random.Range(0.7f, 1);
         //agent.speed = 0.1f;
         agent.stoppingDistance = 0.01f;
+
+        Invoke("buscar",0.1f);
     }
 
     void Update()
     {
-        if (player == null)
+        /* (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
-        }
+        }*/
 
         agent.SetDestination(player.transform.position);
 
@@ -45,11 +46,8 @@ public class ControllerEnemy : MonoBehaviour
             character.Move(Vector3.zero, false, false);
     }
 
-    private void OnTriggerEnter(Collider other)
+    void buscar()
     {
-        if (other.gameObject.tag == "Player")
-        {
-            SceneManager.LoadScene(2);
-        }
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 }

@@ -5,9 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class BotonesCanvasFin : MonoBehaviour
 {
+    public GameObject panelInicio;
+    public GameObject panelFinal;
+
     public void Reiniciar(bool reiniciar)
     {
         if (reiniciar)
-            SceneManager.LoadScene(0);
+        {
+            panelFinal.SetActive(false);
+            panelInicio.SetActive(true);
+            PlayerController.perdio = false;
+        }
+            
     }
 }

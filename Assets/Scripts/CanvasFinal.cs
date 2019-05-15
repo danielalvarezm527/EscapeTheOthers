@@ -16,17 +16,31 @@ public class CanvasFinal : MonoBehaviour
     public TextMeshProUGUI textoPuntos;
     public TextMeshProUGUI textoPuntuacionFinal;
 
+    public GameObject panelInicio;
+    public GameObject panelFinal;
+
     void Start()
     {
-        tiempo = CanvasScript.tiempoFinal;
-        tiempoSegundos = CanvasScript.tiempoMostrarSegundos;
-        puntos = CanvasScript.puntaje;
+        if (PlayerController.perdio == true)
+        {
+            panelInicio.SetActive(false);
+            panelFinal.SetActive(true);
 
-        puntajeFinal = tiempoSegundos + puntos;
+            tiempo = CanvasScript.tiempoFinal;
+            tiempoSegundos = CanvasScript.tiempoMostrarSegundos;
+            puntos = CanvasScript.puntaje;
 
-        textoTiempo.text = tiempo + " Segundos";
-        textoPuntos.text = puntos.ToString() + " Puntos";
-        textoPuntuacionFinal.text = puntajeFinal.ToString("000") + " Puntos totales";
+            puntajeFinal = tiempoSegundos + puntos;
+
+            textoTiempo.text = tiempo + " Segundos";
+            textoPuntos.text = puntos.ToString() + " Puntos";
+            textoPuntuacionFinal.text = puntajeFinal.ToString("000") + " Puntos totales";
+        }
+        else
+        {
+            panelFinal.SetActive(false);
+            panelInicio.SetActive(true);
+        }
     }
 
 }
