@@ -6,37 +6,39 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class ControllerEnemy : MonoBehaviour
 {
-
-    public NavMeshAgent agent;
-
-    public ThirdPersonCharacter character;
-
-    public CapsuleCollider colliderEnemy;
-
-    public GameObject player;
+    private NavMeshAgent agent;
+    private CapsuleCollider colliderEnemy;
+    private GameObject player;
+    private ThirdPersonCharacter character;
 
     void Start()
     {
-        this.gameObject.tag = "Enemy";
-        this.gameObject.AddComponent<NavMeshAgent>();
-        character = this.gameObject.GetComponent<ThirdPersonCharacter>();
         agent = this.gameObject.GetComponent<NavMeshAgent>();
         colliderEnemy = this.gameObject.GetComponent<CapsuleCollider>();
         colliderEnemy.isTrigger = true;
         agent.updateRotation = false;
         agent.speed = Random.Range(0.7f, 1);
-        //agent.speed = 0.1f;
         agent.stoppingDistance = 0.01f;
 
-        Invoke("buscar",0.1f);
+        character = GetComponent<ThirdPersonCharacter>();
+        if (character == null)
+        {
+            Debug.LogError("ThirdPersonCharacter component not found on " + gameObject.name);
+        }
+
+        Invoke("buscar", 0.1f);
     }
 
     void Update()
     {
-        /* (player == null)
+        if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
-        }*/
+            if (player == null)
+            {
+                return; // Si no se encuentra el jugador, salir del método Update
+            }
+        }
 
         agent.SetDestination(player.transform.position);
 

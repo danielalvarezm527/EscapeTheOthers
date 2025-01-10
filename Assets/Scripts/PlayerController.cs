@@ -34,25 +34,51 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
+        #if UNITY_EDITOR
+        // Movimiento con el mouse en el inspector
         if (Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return; // Si el puntero está sobre un objeto de la UI, no procesar el movimiento
+            }
+
             Ray ray = camara.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform.tag == "Muro")
                 {
-                    Touch touch = Input.GetTouch(0);
-                    if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                    vec = hit.point;
+                    agent.SetDestination(vec);
+                }
+            }
+        }
+        #else
+        // Movimiento con toques en Android
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                {
+                    return; // Si el toque está sobre un objeto de la UI, no procesar el movimiento
+                }
+
+                Ray ray = camara.ScreenPointToRay(touch.position);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.tag == "Muro")
                     {
                         vec = hit.point;
                         agent.SetDestination(vec);
                     }
-
                 }
             }
         }
+        #endif
 
         if (agent.remainingDistance > agent.stoppingDistance)
             character.Move(agent.desiredVelocity, false, false);
