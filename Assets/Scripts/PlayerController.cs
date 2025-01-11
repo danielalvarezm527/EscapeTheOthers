@@ -9,6 +9,8 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameManager gameManager;
+
     public Camera camara;
 
     public NavMeshAgent agent;
@@ -22,6 +24,11 @@ public class PlayerController : MonoBehaviour
     public int contadorTouch = 0;
 
     public static bool perdio = false; 
+
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     private void Start()
     {
@@ -91,7 +98,13 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             perdio = true;
-            SceneManager.LoadScene(0);
+            gameManager.DisplayAds();
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.SetActive(false);
+            }
+            // SceneManager.LoadScene(0);
         }
     }
 }

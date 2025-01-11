@@ -17,6 +17,8 @@ public class EnemyGenerator : MonoBehaviour
     public int minimo = 10;
     public int maximo = 20;
     public int numVecesGenerar = 0;
+    
+    public bool active = true;
 
     void Start()
     {
@@ -35,52 +37,55 @@ public class EnemyGenerator : MonoBehaviour
 
         if (tiempo > 90)
         {
-            Generar();
+            if(active)
+                Generar();
             tiempo = 0;
         }
     }
 
     public void Generar()
     {
-        numVecesGenerar += 1;
-        for (int i = 0; i <= Random.Range(minimo, maximo); i++)
-        {
-            enemy = GameObject.FindGameObjectWithTag("Cuerpo");
+        if(active){
+            numVecesGenerar += 1;
+            for (int i = 0; i <= Random.Range(minimo, maximo); i++)
+            {
+                enemy = GameObject.FindGameObjectWithTag("Cuerpo");
 
-            if (numSpawn == 0)
-            {
-                enemigo = Instantiate(enemy, spawn1.transform.position, Quaternion.identity);
-                enemigo.AddComponent<ControllerEnemy>();
-                enemigo.name = "Enemigo";
-                enemigo.tag = "Enemy";
-                numSpawn += 1;
+                if (numSpawn == 0)
+                {
+                    enemigo = Instantiate(enemy, spawn1.transform.position, Quaternion.identity);
+                    enemigo.AddComponent<ControllerEnemy>();
+                    enemigo.name = "Enemigo";
+                    enemigo.tag = "Enemy";
+                    numSpawn += 1;
+                }
+                else if (numSpawn == 1)
+                {
+                    enemigo = Instantiate(enemy, spawn2.transform.position, Quaternion.identity);
+                    enemigo.AddComponent<ControllerEnemy>();
+                    enemigo.name = "Enemigo";
+                    enemigo.tag = "Enemy";
+                    numSpawn += 1;
+                }
+                else if (numSpawn == 2)
+                {
+                    enemigo = Instantiate(enemy, spawn3.transform.position, Quaternion.identity);
+                    enemigo.AddComponent<ControllerEnemy>();
+                    enemigo.name = "Enemigo";
+                    enemigo.tag = "Enemy";
+                    numSpawn += 1;
+                }
+                else if (numSpawn == 3)
+                {
+                    enemigo = Instantiate(enemy, spawn4.transform.position, Quaternion.identity);
+                    enemigo.AddComponent<ControllerEnemy>();
+                    enemigo.name = "Enemigo";
+                    enemigo.tag = "Enemy";
+                    numSpawn += 1;
+                }
+                else if (numSpawn == 4)
+                    numSpawn = 0;
             }
-            else if (numSpawn == 1)
-            {
-                enemigo = Instantiate(enemy, spawn2.transform.position, Quaternion.identity);
-                enemigo.AddComponent<ControllerEnemy>();
-                enemigo.name = "Enemigo";
-                enemigo.tag = "Enemy";
-                numSpawn += 1;
-            }
-            else if (numSpawn == 2)
-            {
-                enemigo = Instantiate(enemy, spawn3.transform.position, Quaternion.identity);
-                enemigo.AddComponent<ControllerEnemy>();
-                enemigo.name = "Enemigo";
-                enemigo.tag = "Enemy";
-                numSpawn += 1;
-            }
-            else if (numSpawn == 3)
-            {
-                enemigo = Instantiate(enemy, spawn4.transform.position, Quaternion.identity);
-                enemigo.AddComponent<ControllerEnemy>();
-                enemigo.name = "Enemigo";
-                enemigo.tag = "Enemy";
-                numSpawn += 1;
-            }
-            else if (numSpawn == 4)
-                numSpawn = 0;
         }
     }
 }
